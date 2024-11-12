@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import NewTodo from "./components/NewTodo";
+import Todos from "./components/Todos";
+import Todo from "./models/todo";
 
 function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const addTodoHandler = (todoText: string) => {
+    const newTodo = new Todo(todoText);
+    setTodos(prevTodos => prevTodos.concat(newTodo));
+  };
+
+  const handleRemoveTodo = (todoId: string) => {
+    const isProceed = window.confirm('Are you sure you want to delete this todo from the list?');
+
+    if (isProceed) {
+      setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId));
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 style={{ textAlign: 'center' }}>React Typescript [TODO-List]</h1>
       </header>
+      <hr />
+      <br />
+      <NewTodo onAddTodo={addTodoHandler} />
+      <hr />
+      <br />
+      <Todos todos={todos} onRemoveTodo={handleRemoveTodo} />
     </div>
   );
 }
