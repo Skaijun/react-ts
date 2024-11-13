@@ -6,6 +6,11 @@
   position: relative;
 }
 
+.completed {
+  background-color: #72f368;
+  text-transform: uppercase;
+}
+
 .remove {
     position: absolute;
     right: 1rem;
