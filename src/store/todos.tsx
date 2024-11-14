@@ -39,7 +39,7 @@ const TodosContextProvider: React.FC<React.PropsWithChildren> = ({ children }) =
       const selectedStateItem = prevTodos[selectedTodoIndex];
       const updatedTodosState = [...prevTodos];
 
-      const updatedItem = {
+      const updatedItem: Todo = {
         ...selectedStateItem,
         isCompleted: !selectedStateItem?.isCompleted
       };
